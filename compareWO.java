@@ -1,3 +1,5 @@
+ 
+
 import java.util.*;
 /**
  * Takes 3 Strings as input and then compares the first character and then outputs the shtuff in order

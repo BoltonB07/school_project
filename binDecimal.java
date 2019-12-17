@@ -1,3 +1,5 @@
+ 
+
 import java.util.*;
 /**
  * Program takes a binary number as input and throws a decimal equivalent of it on the terminal window.

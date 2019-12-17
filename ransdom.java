@@ -1,3 +1,5 @@
+ 
+
 class ransdom{
 
     public static void main(){

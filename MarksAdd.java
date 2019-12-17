@@ -1,3 +1,5 @@
+ 
+
 import java.util.*;
 /**
  * Takes input of 3 marks and calculates percentage and average and outputs it and returns back and starts gain if input is wrong

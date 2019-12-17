@@ -1,3 +1,5 @@
+ 
+
 import java.util.*;
 /**
  * Dit is een programma dat kontroleert als een zin dat je hebt gedrukked is een VVrij zin of niet.

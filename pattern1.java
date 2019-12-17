@@ -1,3 +1,5 @@
+ 
+
 import java.util.*;
 /**
  * Write a description of class pattern1 here. NOT UPLOADED

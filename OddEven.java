@@ -1,3 +1,5 @@
+ 
+
 import java.util.*;
 /**
  * Inputs a number and checks if that number is odd or even or zero.
