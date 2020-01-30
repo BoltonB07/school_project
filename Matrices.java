@@ -40,11 +40,11 @@ public class Matrices
         System.out.println("What do ya wanna do?\n1)Add\n2)Multiply");
         int choice=sc.nextInt();
         if(choice==1){
-            fin=Matrix.add(a,b);
+            fin=Matrix1.add(a,b);
             print(fin);
         }
         else if(choice==2){
-            fin=Matrix.multiply(a,b);
+            fin=Matrix1.multiply(a,b);
             print(fin);
         }
         else{

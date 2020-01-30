@@ -7,7 +7,7 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Matrix
+public class Matrix1
 {
     static int[][] add(int[][] a,int[][] b ){
         for(int i=0;i<=a.length-1;i++){

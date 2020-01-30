@@ -1,12 +1,4 @@
- 
-
 import java.util.*;
-/**
- * Write a description of class pattern1 here. NOT UPLOADED
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class pattern1
 { 
     int i,n,j; static int lol; String s,trash; static boolean patternType;
