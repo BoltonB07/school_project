@@ -1,6 +1,5 @@
 ------------------------------------------------------------------------
-Hello my name is Rahil. I am in XI-A. Please don't delete my project. Even if you delete it, I have back-up.
-Don't delete this please.
+Hello and welcome to mmy repository! I am Rahil Shaban. I don't really have an aim with this set of programs; it's just a bunch of things that I had to make in school. But there are a few programs that I made out of my own interest. Thanks for viewing this!
 
 ------------------------------------------------------------------------
 
