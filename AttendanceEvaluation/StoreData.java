@@ -3,7 +3,7 @@ import java.util.*;
 import java.io.*;
 /**
  * DISCLAIMER: WORKS AS INTENDED
- * 
+ *
  * This class inputs date and absentee roll nos and writes the data in the file "absenteeList.txt" found in main package.
  * Path: D:\\BlueJ Stuff\\Rahil XI\\AbsenteeList.txt
  *
@@ -24,16 +24,17 @@ public class StoreData
         boolean continueLoop=true;
         int iterationCounter=0, serialNum=0;
         File f=new File("absenteeList.txt");
-
         if(f.length()==0){
             serialNum=0; System.out.println("File is currently empty");
         }
         else{
             Scanner line;
-            FileReader fileLastLine=new FileReader("AbsenteeList.txt");
+            FileReader fileLastLine=new FileReader(f);//No need to specify the pathname again
             BufferedReader lastLine=new BufferedReader(fileLastLine);
-            String lastLineOfData=null;
-            while((lastLineOfData = lastLine.readLine()) != null){
+            String lastLineOfData=null, current = lastLine.readLine();
+            while (current != null) { //Previously, the loop stopped when lastLineOfData is null
+                lastLineOfData = current;
+                current = lastLine.readLine();
                 serialNum++;
             }
             line=new Scanner(lastLineOfData);
@@ -41,9 +42,9 @@ public class StoreData
             System.out.println("The last entered date was: "+line.next()+" "+line.next()+" "+line.next());
         }
         while(continueLoop){
-            System.out.println('\u000C');  //Clears screen (The previous iteration)
-
             if(iterationCounter>0){
+                //Moved the below line here
+                System.out.println('\u000C');  //Clears screen (The previous iteration)
                 System.out.println("Number of entered days (IN THE CURRENT SESSION): "+iterationCounter);
                 System.out.println("The last entered date was: "+date);
 
