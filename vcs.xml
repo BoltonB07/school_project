@@ -14,6 +14,10 @@
           <option name="url" value="c:\path\to\PortableGit-2.6.2-64-bit\usr\bin" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://www.githb.com/BoltonB07/school_project" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="D:\BlueJ Stuff" />
