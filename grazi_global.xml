@@ -1,0 +1,15 @@
+<application>
+  <component name="GraziConfig">
+    <option name="nativeLanguage" value="Dutch" />
+    <option name="enabledCommitIntegration" value="true" />
+    <option name="userEnabledRules">
+      <set>
+        <option value="PASSIONATE_BY_ABOUT_2" />
+        <option value="POPULAR_AMONG_WITH" />
+        <option value="UPPERCASE_SENTENCE_START" />
+        <option value="WAITING_MY_PATIENT" />
+      </set>
+    </option>
+    <option name="lastSeenVersion" value="2019.3-6.2.stable" />
+  </component>
+</application>
