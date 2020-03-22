@@ -2,7 +2,7 @@ package AttendanceEvaluation;
 import java.util.*;
 import java.io.*;
 /**
- * DISCLAIMER: DOES NOT WORK AS INTENDED writeData() show last date feature throws an exception when data already exists in a file
+ * DISCLAIMER: WORKS AS INTENDED
  * 
  * writeData() inputs date and absentee roll nos and writes the data in the file "absenteeList.txt" found in main package.
  * Path: D:\\BlueJ Stuff\\Rahil XI\\AbsenteeList.txt
@@ -15,6 +15,7 @@ import java.io.*;
  *
  * @author BoltonB07
  * @version 1.0.9 15/3/2020
+ * PS: I hate coronavirus.
  */
 public class Data{
     void exe() throws IOException{
@@ -83,7 +84,7 @@ public class Data{
         br.close();
     }
 
-    /*int[] readData(int lineNum){
+    /*int[] readData(int serialNum){   
         
     }*/
 }
