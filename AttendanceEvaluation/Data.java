@@ -1,4 +1,5 @@
 package AttendanceEvaluation;
+
 import java.util.*;
 import java.io.*;
 /**
@@ -18,7 +19,7 @@ import java.io.*;
  * PS: I hate coronavirus.
  */
 public class Data{
-    void exe() throws IOException{
+    void writeData() throws IOException{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         FileWriter file = new FileWriter("absenteeList.txt",true);
         BufferedWriter bw=new BufferedWriter(file);
@@ -67,7 +68,7 @@ public class Data{
             }
             serialNum++;
 
-            //Writing part of this program
+            //W riting part of this program
             {
 
                 StringTokenizer tk=new StringTokenizer(absenteeList,",");
@@ -84,7 +85,7 @@ public class Data{
         br.close();
     }
 
-    /*int[] readData(int serialNum){   
+    int[] readData(int serialNum){   
         
-    }*/
+    }
 }

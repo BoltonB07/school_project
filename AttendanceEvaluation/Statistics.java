@@ -32,7 +32,7 @@ public class Statistics
         r=((n*Sigxy)-(Sigx*Sigy))/(Math.pow(((n*Sigx2)-(Math.pow(Sigx,2)))*((n*Sigy2)-(Math.pow(Sigy,2))),0.5));
         return r;
     }
-    int MaxAbsent() throws IOException{         //Returns the roll Num of the student who? been absent most number of times.
+    int MaxAbsent() throws IOException{         //Returns the roll Num of the student who has been absent most number of times.
         int[] rollArr=new int[31];
         for(int j=0;j<=rollArr.length-1;j++){   //Initializing all the values as 0 first.
             rollArr[j]=0;
