@@ -2,10 +2,11 @@ package Programs2020_21;
 
 import java.util.*;
 /**
- * Write a description of class Q3_2016 here.
+ * Question 3 from 2016 ISC XII Grade Computer Sciecne Practical Question Paper.
+ * 
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Rahil
+ * @version 1.0.0
  */
 public class Q3_2016
 {
@@ -39,7 +40,7 @@ public class Q3_2016
         }
     }
     public static void main(){
-        System.out.println("Enter sentence ending with a \".\" or \"?\" or \"!\"");
+        System.out.println("Enter sentence ending with a \".\" or \"?\" or \"!\""); 
         Scanner sc=new Scanner(System.in);
         String s=sc.nextLine();
         if(!(s.charAt(s.length()-1)=='.' ||s.charAt(s.length()-1)=='?' ||s.charAt(s.length()-1)=='!')){
