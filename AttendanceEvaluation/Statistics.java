@@ -20,7 +20,7 @@ public class Statistics
         for(int j=0;j<=n-1;j++){
             xy[j]=x[j]*y[j];
             x2[j]=x[j]*x[j];
-            y2[j]=y[j]*y[j];
+            y2[j]=y[j]*y[j];    
         }
         for(int k=0;k<=n-1;k++){
             Sigx+=x[k];
@@ -29,7 +29,7 @@ public class Statistics
             Sigx2+=x2[k];
             Sigy2+=y2[k];
         }
-        r=((n*Sigxy)-(Sigx*Sigy))/(Math.pow(((n*Sigx2)-(Math.pow(Sigx,2)))*((n*Sigy2)-(Math.pow(Sigy,2))),0.5));
+        r=((n*Sigxy)-(Sigx*Sigy))/(Math.pow(((n*Sigx2)-(Math.pow(Sigx,2)))*((n*Sigy2)-(Math.pow(Sigy,2))),0.5));   
         return r;
     }
     int MaxAbsent() throws IOException{         //Returns the roll Num of the student who has been absent most number of times.

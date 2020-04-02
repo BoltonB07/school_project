@@ -84,8 +84,4 @@ public class Data{
         bw.close();
         br.close();
     }
-
-    int[] readData(int serialNum){   
-        
-    }
 }

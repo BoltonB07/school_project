@@ -56,7 +56,7 @@ public class Q2_2017
         System.out.println("Enter the paricipant's options:");
         for(int i=0;i<=OPT.length-1;i++){
             System.out.println("Participant: "+(i+1));
-            for(int j=0;j<=OPT[i].length-1;j++){
+            for(int j=0;j<=OPT[i].length-1;j++){ 
                 OPT[i][j]=((br.readLine()).toUpperCase()).charAt(0);
             }
         }
