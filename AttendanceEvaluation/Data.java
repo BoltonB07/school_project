@@ -1,22 +1,25 @@
 package AttendanceEvaluation;
+
 import java.util.*;
 import java.io.*;
 /**
  * DISCLAIMER: WORKS AS INTENDED
- *
- * This class inputs date and absentee roll nos and writes the data in the file "absenteeList.txt" found in main package.
+ * 
+ * writeData() inputs date and absentee roll nos and writes the data in the file "absenteeList.txt" found in main package.
  * Path: D:\\BlueJ Stuff\\Rahil XI\\AbsenteeList.txt
- *
- *How to read the file (for humans): Sample: 15 3 2020  1   5      2   5   16  23  30
- *The first 3 numbers is the date. The fourth is the serial Number, to be used by the software primarily.The fifth is the number of absentees (can be 0).
- *The remaining are the roll nos of the absentees (There can be no absentees too).
+ * 
+ * readData()
+ * 
+ * How to read the file (for humans): Sample: 15 3 2020  1   5      2   5   16  23  30
+ * The first 3 numbers is the date. The fourth is the serial Number, to be used by the software primarily.The fifth is the number of absentees (can be 0).
+ * The remaining are the roll nos of the absentees (There can be no absentees too).
  *
  * @author BoltonB07
- * @version 1.0.0 15/3/2020
+ * @version 1.0.9 15/3/2020
+ * PS: I hate coronavirus.
  */
-public class StoreData
-{
-    void exe() throws IOException{
+public class Data{
+    void writeData() throws IOException{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         FileWriter file = new FileWriter("absenteeList.txt",true);
         BufferedWriter bw=new BufferedWriter(file);
@@ -38,7 +41,6 @@ public class StoreData
                 serialNum++;
             }
             line=new Scanner(lastLineOfData);
-            serialNum++;
             System.out.println("The last entered date was: "+line.next()+" "+line.next()+" "+line.next());
         }
         while(continueLoop){
@@ -66,7 +68,7 @@ public class StoreData
             }
             serialNum++;
 
-            //Writing part of this program
+            //W riting part of this program
             {
 
                 StringTokenizer tk=new StringTokenizer(absenteeList,",");
