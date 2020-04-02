@@ -10,8 +10,15 @@ import java.util.*;
  */
 public class ReadData
 {
-    
+
     int[] line(int serialNum) throws IOException{   
-        
+        BufferedReader br=new BufferedReader(new FileReader("absenteeList.txt"));
+        Scanner sc;
+        String line;
+        while((line=br.readLine())!=null){
+            sc=new Scanner(line);
+            sc.next();sc.next();sc.next();sc.next();sc.next();
+            
+        }
     }
 }

@@ -18,7 +18,7 @@ import java.io.*;
  * @version 1.0.9 15/3/2020
  * PS: I hate coronavirus.
  */
-public class Data{
+public class User{
     void writeData() throws IOException{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         FileWriter file = new FileWriter("absenteeList.txt",true);
