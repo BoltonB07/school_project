@@ -15,10 +15,15 @@ public class dateAndDay
     }
 
     void calc(){
-        n=m*30+d;
+        int d=0;
+        int m=0;
+        //n=m*30+d;
     }
 
     void dispRes(){
+        String n="";
+        String m="";
+        String d="";
         System.out.println("The date you entered in dd/mm/yyyy format is: "+d+"/"+m+"/2019"+"\nThe day number for the given date is: "+n);
     }
 

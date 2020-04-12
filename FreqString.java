@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class FreqString
 {
-    String s; int fa,fb,fc,fd,fe
+    String s; int fa,fb,fc,fd,fe;
     void init(){
         Scanner sc=new Scanner(System.in);
         System.out.println("Please enter the word");

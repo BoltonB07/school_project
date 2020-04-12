@@ -20,6 +20,6 @@ public class Graphics extends JFrame
 }
 class Ball{
     void ball(){
-        Graphics.init();
+       // Graphics.init();
     }
 }

@@ -18,15 +18,12 @@ public class Object
     
     }
     static void main(){
-        try{
+
         Object o=new Object();
         System.out.println(o);
         o.in(69);
-        File obj = File("C:\\Desktop\bjectAddress.txt");
-    }
-    catch(IOException e){
-    
-    }
+        //File obj = new File("C:\\Desktop\bjectAddress.txt");
+
         
     }
 }

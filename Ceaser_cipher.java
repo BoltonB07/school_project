@@ -36,7 +36,7 @@ public class Ceaser_cipher
         {
             if((Character.isUpperCase(temp.charAt(i))))
             {
-                    .toUpperCase();
+                    //.toUpperCase();
             }
             
         }

@@ -23,7 +23,7 @@ public class Matrix90
     void calc(){
         for(int i = 0;i<=arr.length-1;i++){
             for(int j=0;j<=arr[i].length-1;i++){
-                arr[i][j]
+                //arr[i][j]
             }
         }
     }

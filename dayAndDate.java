@@ -16,10 +16,16 @@ public class dayAndDate
             int m,y=2019;
         }
         void calc(){
-                m=d/30;
-                d=d-(m*30);
+            int m=0;
+            int d=0;
+            m = d / 30;
+           // int d = d - (m * 30);
         }
         void dispRes(){
+            String y="";
+            String m="";
+            String d="";
+            String n="";
             System.out.println("The number you put in was:"+n+"\n The days in dd/mm/yyyy format is:"+d+"/"+m+"/"+y);
         }
         void main(){

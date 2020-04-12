@@ -16,6 +16,6 @@ public class compositeMagicNum
         in=sc.nextInt();
     }
     void checkComposite(){
-        for(int i=1;i<=in;)
+        for(int i=1;i<=in;){}
     }
 }

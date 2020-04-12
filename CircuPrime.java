@@ -29,11 +29,11 @@ class CircuPrime
     void calc(){
         for(int i=0;i<numDigits;i++){                
             if(i==numDigits-1){number2[0]=number[i];}
-            else if()
-            {
-                number2[i+1]=number[i];}
+            //else if()
+           // {
+          //      number2[i+1]=number[i];}
             for(int j=0;j<=numDigits-1;i++){
-                s=s.concat(valueOf(number2[i])) ;      //Rotated Number converted to String
+               // s=s.concat(valueOf(number2[i])) ;      //Rotated Number converted to String
             }
 
         }                                    

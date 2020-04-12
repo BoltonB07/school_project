@@ -14,10 +14,10 @@ public class Encryptor
         Scanner sc=new Scanner(System.in);
         System.out.println("Please enter a text to be encrypted");
         input=sc.nextLine();
-        for(int ;;){
-            randFactor=(int)(1000*Math.random());
-            hdefugrue
-        }
+        //for(int ;;){
+          //  randFactor=(int)(1000*Math.random());
+
+       // }
     }
 }
 

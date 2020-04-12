@@ -44,7 +44,7 @@ class Movement extends KeyAdapter{
     public void keyPressed(KeyEvent e){
         int k=e.getKeyCode();
         switch(k){
-            Case KeyEvent.VK_W
+            //Case KeyEvent.VK_W
             
         }
     }
