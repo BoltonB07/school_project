@@ -94,9 +94,9 @@ public class Decipher {
         }
     }
     private void howSimilar(String input){
-        long inputValue=0,outputValue=0;
+        double inputValue=0,outputValue=0;
         double similarityRatio,similarityPercentage;
-        for(int i=0;i<=input.length()-1;i++){inputValue+=input.charAt(i);};
+        for(int i=0;i<=input.length()-1;i++){inputValue+=input.charAt(i);}
         for(int j=0;j<=outputArr.length-1;j++){
             for(int k=0;k<=outputArr[j].length-1;k++){
                 outputValue+=outputArr[j][k];
