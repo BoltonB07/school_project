@@ -11,11 +11,12 @@ public class Decipher {
     char[][] outputArr;
     char[][] inputArr;
     int[] freq=new int[26];
-    private String init() throws IOException {
+    String input;
+    private void init() throws IOException {
         System.out.println("Please enter a sentence with no special characters apart from usual punctuations, and only ASCII characters.)");
         System.out.println("Note: 1) It will not decipher numbers\n2)Try to enter a sentence as long as possible");
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        String input=br.readLine();
+        input=br.readLine();
         input=input.toLowerCase();
         for(int i=0;i<=freq.length-1;i++){
             freq[i]=0;
@@ -37,9 +38,8 @@ public class Decipher {
                 inputArr[i][j]= (char) br.read();
             }
         }
-        return input;
     }
-    private void freqCalc(String input) {
+    private void freqCalc() {
         char temp;
         for(int i=0;i<=25;i++){
             for(int j=0;j<=input.length()-1;j++) {
@@ -93,7 +93,7 @@ public class Decipher {
             }
         }
     }
-    private void howSimilar(String input){
+    private void howSimilar(){
         long inputValue=0,outputValue=0;
         double similarityRatio,similarityPercentage;
         for(int i=0;i<=input.length()-1;i++){inputValue+=input.charAt(i);};
@@ -109,9 +109,9 @@ public class Decipher {
 
     public static void main(String[] args) throws IOException {
         Decipher obj= new Decipher();
-        String sentence=obj.init();
-        obj.freqCalc(sentence);
+        obj.init();
+        obj.freqCalc();
         obj.changeAndPrint();
-        obj.howSimilar(sentence);
+        obj.howSimilar();
     }
 }
