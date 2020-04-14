@@ -2,6 +2,7 @@ package Programs2020_21;
 
 
 
+import java.awt.*;
 import java.io.*;
 import java.util.StringTokenizer;
 
@@ -11,13 +12,17 @@ public class Decipher {
     char[][] outputArr;
     char[][] inputArr;
     int[] freq=new int[26];
-    String input;
+    String input, plainText;
     private void init() throws IOException {
         System.out.println("Please enter a sentence with no special characters apart from usual punctuations, and only ASCII characters.)");
         System.out.println("Note: 1) It will not decipher numbers\n2)Try to enter a sentence as long as possible");
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         input=br.readLine();
         input=input.toLowerCase();
+        System.out.println("Enter the plaintext");
+        plainText = br.readLine();
+        plainText = plainText.toLowerCase();
+
         for(int i=0;i<=freq.length-1;i++){
             freq[i]=0;
         }
@@ -76,13 +81,25 @@ public class Decipher {
         for(int i=0;i<=25;i++){
             searchAndInput(outputArr,inputArr,charArr[i],charFreqArr[i]);
         }
+        ColorPrinter printer = new ColorPrinter(640, 640);
+        Color red = new Color(255, 0, 0, 100);
+        Color green = new Color(0, 255, 0, 100);
+        int index = 0;
         for(int j=0;j<=outputArr.length-1;j++){
             for(int k=0;k<=outputArr[j].length-1;k++){
-                System.out.print(outputArr[j][k]);
+                if (outputArr[j][k] == plainText.charAt(index)) {
+                    printer.setBackground(green);
+                } else {
+                    printer.setBackground(red);
+                }
+                printer.print(outputArr[j][k] + "");
+                index++;
             }
-            System.out.print(" ");
+            printer.setBackground(Color.WHITE);
+            printer.print(" ");
+            index++;
         }
-        System.out.println();
+        printer.finish();
     }
     private void searchAndInput(char[][] output, char[][] input, String replaceWhat,String replaceWith){
         for(int i=0;i<=input.length-1;i++){
