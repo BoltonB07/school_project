@@ -111,7 +111,7 @@ public class Decipher {
         }
     }
     private void howSimilar(){
-        long inputValue=0,outputValue=0;
+        double inputValue=0,outputValue=0;
         double similarityRatio,similarityPercentage;
         for(int i=0;i<=input.length()-1;i++){inputValue+=input.charAt(i);};
         for(int j=0;j<=outputArr.length-1;j++){
