@@ -2,6 +2,7 @@ package Programs2020_21;
 
 
 
+import java.awt.*;
 import java.io.*;
 import java.util.StringTokenizer;
 
@@ -11,12 +12,17 @@ public class Decipher {
     char[][] outputArr;
     char[][] inputArr;
     int[] freq=new int[26];
-    private String init() throws IOException {
+    String input, plainText;
+    private void init() throws IOException {
         System.out.println("Please enter a sentence with no special characters apart from usual punctuations, and only ASCII characters.)");
         System.out.println("Note: 1) It will not decipher numbers\n2)Try to enter a sentence as long as possible");
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        String input=br.readLine();
+        input=br.readLine();
         input=input.toLowerCase();
+        System.out.println("Enter the plaintext");
+        plainText = br.readLine();
+        plainText = plainText.toLowerCase();
+
         for(int i=0;i<=freq.length-1;i++){
             freq[i]=0;
         }
@@ -37,9 +43,8 @@ public class Decipher {
                 inputArr[i][j]= (char) br.read();
             }
         }
-        return input;
     }
-    private void freqCalc(String input) {
+    private void freqCalc() {
         char temp;
         for(int i=0;i<=25;i++){
             for(int j=0;j<=input.length()-1;j++) {
@@ -76,13 +81,25 @@ public class Decipher {
         for(int i=0;i<=25;i++){
             searchAndInput(outputArr,inputArr,charArr[i],charFreqArr[i]);
         }
+        ColorPrinter printer = new ColorPrinter(640, 640);
+        Color red = new Color(255, 0, 0, 100);
+        Color green = new Color(0, 255, 0, 100);
+        int index = 0;
         for(int j=0;j<=outputArr.length-1;j++){
             for(int k=0;k<=outputArr[j].length-1;k++){
-                System.out.print(outputArr[j][k]);
+                if (outputArr[j][k] == plainText.charAt(index)) {
+                    printer.setBackground(green);
+                } else {
+                    printer.setBackground(red);
+                }
+                printer.print(outputArr[j][k] + "");
+                index++;
             }
-            System.out.print(" ");
+            printer.setBackground(Color.WHITE);
+            printer.print(" ");
+            index++;
         }
-        System.out.println();
+        printer.finish();
     }
     private void searchAndInput(char[][] output, char[][] input, String replaceWhat,String replaceWith){
         for(int i=0;i<=input.length-1;i++){
@@ -93,10 +110,10 @@ public class Decipher {
             }
         }
     }
-    private void howSimilar(String input){
+    private void howSimilar(){
         double inputValue=0,outputValue=0;
         double similarityRatio,similarityPercentage;
-        for(int i=0;i<=input.length()-1;i++){inputValue+=input.charAt(i);}
+        for(int i=0;i<=input.length()-1;i++){inputValue+=input.charAt(i);};
         for(int j=0;j<=outputArr.length-1;j++){
             for(int k=0;k<=outputArr[j].length-1;k++){
                 outputValue+=outputArr[j][k];
@@ -109,9 +126,9 @@ public class Decipher {
 
     public static void main(String[] args) throws IOException {
         Decipher obj= new Decipher();
-        String sentence=obj.init();
-        obj.freqCalc(sentence);
+        obj.init();
+        obj.freqCalc();
         obj.changeAndPrint();
-        obj.howSimilar(sentence);
+        obj.howSimilar();
     }
 }
