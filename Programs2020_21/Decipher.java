@@ -115,25 +115,11 @@ public class Decipher {
             }
         }
     }
-    private void howSimilar(){
-        double inputValue=0,outputValue=0;
-        double similarityRatio,similarityPercentage;
-        for(int i=0;i<=input.length()-1;i++){inputValue+=input.charAt(i);}
-        for(int j=0;j<=outputArr.length-1;j++){
-            for(int k=0;k<=outputArr[j].length-1;k++){
-                outputValue+=outputArr[j][k];
-            }
-        }
-        similarityRatio=inputValue/outputValue;
-        similarityPercentage=similarityRatio*100;
-        System.out.println("InputValue="+inputValue+"\nOutputValue="+outputValue+"\nSimilarityRatio and Percentage="+similarityRatio+" and "+similarityPercentage);
-    }
 
     public static void main(String[] args) throws IOException {
         Decipher obj= new Decipher();
         obj.init();
         obj.freqCalc();
         obj.changeAndPrint();
-        obj.howSimilar();
     }
 }
