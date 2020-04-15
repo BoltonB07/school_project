@@ -70,7 +70,7 @@ class ColorPrinter {
      * Displays all the text
      * <p>
      * This should be called only after everything is printed. Once this is called, calls to print and println will
-     * not update the screen
+     * not update the screen.
      */
     void finish() {
         frame.add(pane);

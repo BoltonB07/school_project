@@ -78,6 +78,7 @@ public class Decipher {
     }
 
     private void changeAndPrint(){
+        double numberOfCorrect=0.0, totalChars=0, accuracyPercentage;
         for(int i=0;i<=25;i++){
             searchAndInput(outputArr,inputArr,charArr[i],charFreqArr[i]);
         }
@@ -87,8 +88,10 @@ public class Decipher {
         int index = 0;
         for(int j=0;j<=outputArr.length-1;j++){
             for(int k=0;k<=outputArr[j].length-1;k++){
+                totalChars++;
                 if (outputArr[j][k] == plainText.charAt(index)) {
                     printer.setBackground(green);
+                    numberOfCorrect++;
                 } else {
                     printer.setBackground(red);
                 }
@@ -99,6 +102,8 @@ public class Decipher {
             printer.print(" ");
             index++;
         }
+        accuracyPercentage=(numberOfCorrect/totalChars)*100;
+        System.out.println("Number of characters correct: "+numberOfCorrect+"\nOut of total: "+totalChars+"\nPercentage="+accuracyPercentage);
         printer.finish();
     }
     private void searchAndInput(char[][] output, char[][] input, String replaceWhat,String replaceWith){
@@ -113,7 +118,7 @@ public class Decipher {
     private void howSimilar(){
         double inputValue=0,outputValue=0;
         double similarityRatio,similarityPercentage;
-        for(int i=0;i<=input.length()-1;i++){inputValue+=input.charAt(i);};
+        for(int i=0;i<=input.length()-1;i++){inputValue+=input.charAt(i);}
         for(int j=0;j<=outputArr.length-1;j++){
             for(int k=0;k<=outputArr[j].length-1;k++){
                 outputValue+=outputArr[j][k];
