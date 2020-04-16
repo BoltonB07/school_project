@@ -5,36 +5,25 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import java.awt.*;
+import java.awt.Color;
 
 class ColorPrinter {
 
-    private JFrame frame;
-    private JTextPane pane;
+    private JScrollPane scrollPane;
     private StyledDocument doc;
     private Style style;
 
     ColorPrinter() {
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pane = new JTextPane();
-        pane.setEditable(false);
-        doc = pane.getStyledDocument();
+        JTextPane textPane = new JTextPane();
+        scrollPane = new JScrollPane(textPane);
+        textPane.setEditable(false);
+        doc = textPane.getStyledDocument();
         style = doc.addStyle("", null);
-    }
-
-    /**
-     * @param width the width of the screen
-     * @param height the height of the screen
-     */
-    ColorPrinter(int width, int height) {
-        this();
-        frame.setSize(width, height);
     }
 
     //Example demonstrating its use
     public static void main(String[] args) {
-        ColorPrinter printer = new ColorPrinter(640, 640);
+        ColorPrinter printer = new ColorPrinter();
         printer.println("HAI I AM A CHICKEN EATING DINO");
         printer.setBackground(Color.BLUE);
         printer.println("NICE COLOR");
@@ -54,16 +43,16 @@ class ColorPrinter {
         StyleConstants.setBackground(style, color);
     }
 
-    void print(String s) {
+    void print(Object o) {
         try {
-            doc.insertString(doc.getLength(), s, style);
+            doc.insertString(doc.getLength(), o.toString(), style);
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
     }
 
-    void println(String s) {
-        print(s + "\n");
+    void println(Object o) {
+        print(o + "\n");
     }
 
     /**
@@ -73,7 +62,34 @@ class ColorPrinter {
      * not update the screen.
      */
     void finish() {
-        frame.add(pane);
-        frame.setVisible(true);
+        //Executes the following code in the event dispatching thread rather than the main thread
+        //I don't know what that means either but it fixes the problem
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame frame = new JFrame();
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.getContentPane().add(scrollPane);
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
+    }
+
+    /**
+     * @param width the width of the JFrame
+     * @param height the height of the JFrame
+     */
+    void finish(int width, int height) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame frame = new JFrame();
+                frame.setSize(width, height);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.getContentPane().add(scrollPane);
+                frame.setVisible(true);
+            }
+        });
     }
 }
