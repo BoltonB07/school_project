@@ -82,7 +82,7 @@ public class Decipher {
         for(int i=0;i<=25;i++){
             searchAndInput(outputArr,inputArr,charArr[i],charFreqArr[i]);
         }
-        ColorPrinter printer = new ColorPrinter(640, 640);
+        ColorPrinter printer = new ColorPrinter();
         Color red = new Color(255, 0, 0, 100);
         Color green = new Color(0, 255, 0, 100);
         int index = 0;
@@ -95,7 +95,7 @@ public class Decipher {
                 } else {
                     printer.setBackground(red);
                 }
-                printer.print(outputArr[j][k] + "");
+                printer.print(outputArr[j][k]);
                 index++;
             }
             printer.setBackground(Color.WHITE);
@@ -104,7 +104,7 @@ public class Decipher {
         }
         accuracyPercentage=(numberOfCorrect/totalChars)*100;
         System.out.println("Number of characters correct: "+numberOfCorrect+"\nOut of total: "+totalChars+"\nPercentage="+accuracyPercentage);
-        printer.finish();
+        printer.finish(640, 640);
     }
     private void searchAndInput(char[][] output, char[][] input, String replaceWhat,String replaceWith){
         for(int i=0;i<=input.length-1;i++){
