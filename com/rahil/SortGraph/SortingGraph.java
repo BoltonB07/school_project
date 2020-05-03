@@ -10,19 +10,25 @@ class SortingGraph extends JPanel {
 
     private static final int WIDTH = 640, HEIGHT = 500;
 
-    //Change the number of sorting algorithms when you add more
-    private static final int SORTING_ALGORITHMS = 1;
+    //Change the number of sorting algorithms if you add more
+    private static final int SORTING_ALGORITHMS = 6;
 
     private static final SortingThread.SortingFunction[] SORTING_FUNCTIONS = new SortingThread.SortingFunction[]{
-            Arrays :: sort
-            //Add method references to sorting algorithms in the format <Class name>::method name
+            Arrays :: sort,
+            Sort :: Bubble,
+            Sort :: Insertion,
+            Sort :: Selection,
+            Sort :: Merge,
+            Sort :: Quick
+            //Add method references to sorting algorithms in the format <Class name> :: method name
     };
 
     //Add names of the algorithms in the same order as above
-    private static final String[] NAMES = new String[]{"Java Sort"};
+    private static final String[] NAMES = new String[]{"Java Sort", "Bubble sort", "Insertion sort", "Selection sort"
+            , "Merge sort", "Quick sort"};
 
     //Add colors of the graph for each algorithm in the same order as above
-    private static final Color[] COLORS = new Color[]{Color.BLACK};
+    private static final Color[] COLORS = new Color[]{Color.BLACK, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.ORANGE};
 
     JFrame frame;
     double[][] lines;
