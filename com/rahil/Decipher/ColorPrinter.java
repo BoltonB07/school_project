@@ -1,4 +1,4 @@
-package Programs2020_21;
+package com.rahil.Decipher;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;

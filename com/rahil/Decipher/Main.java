@@ -1,4 +1,4 @@
-package Programs2020_21;
+package com.rahil.Decipher;
 
 
 
@@ -6,7 +6,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.StringTokenizer;
 
-public class Decipher {
+public class Main {
     String[] charFreqArr={"e","t","a","o","i","n","s","h","r","d","l","c","u","m","w","f","g","y","p","b","v","k","j","x","q","z"}; //Most frequent to the least frequent
     String[] charArr={"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
     char[][] outputArr;
@@ -117,7 +117,7 @@ public class Decipher {
     }
 
     public static void main(String[] args) throws IOException {
-        Decipher obj= new Decipher();
+        Main obj= new Main();
         obj.init();
         obj.freqCalc();
         obj.changeAndPrint();
