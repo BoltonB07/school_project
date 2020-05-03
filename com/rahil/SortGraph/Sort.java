@@ -7,7 +7,7 @@ package com.rahil.SortGraph;
  * Currently, it does 5 kinds of sorting: Bubble, Insertion, Selection, Merge, Quick.
  * */
 public class Sort {
-    public int Bubble(int[] A){
+    public static int Bubble(int[] A){
         int temp,iterations=0;
         for (int i=0;i<A.length-1-1;i++){
             for (int j=0;j<A.length-1-i-1;j++){
@@ -21,7 +21,7 @@ public class Sort {
         }
         return iterations;
     }
-    public int Insertion(int[] A){
+    public static int Insertion(int[] A){
         int iterations=0;
         for(int i=0;i<A.length;++i){
 
@@ -36,7 +36,7 @@ public class Sort {
         }
         return iterations;
     }
-    public int Selection(int[] A){
+    public static int Selection(int[] A){
         int min_index,temp,iterations=0;
         for (int i = 0; i < A.length-1; i++){
             min_index=i;
@@ -51,10 +51,10 @@ public class Sort {
         }
         return iterations;
     }
-    public int Merge(int[] A){
+    public static int Merge(int[] A){
         return mergeSort(A,0,A.length-1);
     }
-    private int mergeSort(int[] A,int beg, int end){
+    private static int mergeSort(int[] A,int beg, int end){
         int mid,iterations=0;
         if(beg<end)
         {
@@ -66,7 +66,7 @@ public class Sort {
         }
         return iterations;
     }
-    private int merge(int[] arr, int beg, int mid, int end, int iterations){
+    private static int merge(int[] arr, int beg, int mid, int end, int iterations){
         int l = mid - beg + 1;
         int r = end - mid;
         int[] LeftArray = new int [l];
@@ -107,12 +107,12 @@ public class Sort {
         }
         return iterations;
     }
-    public int Quick(int[] A){
+    public static int Quick(int[] A){
         int iterations=0;
         quicksort(A, 0, A.length-1,iterations);
         return iterations;
     }
-    private int quicksort(int[] arr, int low, int high, int iterations){
+    private static int quicksort(int[] arr, int low, int high, int iterations){
         if (low < high){
             iterations++;           //incremented here
             int[] receiveArray = partition(arr, low, high,iterations);
@@ -123,7 +123,7 @@ public class Sort {
         }
         return iterations;
     }
-    private int[] partition(int[] arr, int low, int high, int iterations){
+    private static int[] partition(int[] arr, int low, int high, int iterations){
         int pivot = arr[high];
         int i = (low-1);
         for (int j=low; j<high; j++){

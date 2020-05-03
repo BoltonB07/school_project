@@ -2,9 +2,6 @@ package com.rahil.SortGraph;
 
 import java.util.Arrays;
 
-/**
- * Represents a
- */
 class SortingThread extends Thread {
 
     static int[][] randomArrays;
