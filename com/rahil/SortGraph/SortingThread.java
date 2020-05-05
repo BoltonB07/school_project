@@ -12,6 +12,7 @@ class SortingThread extends Thread {
     SortingFunction sorter;
     double[] times;
     double[] movingAverages;
+    double[] iterations;
 
     SortingThread(SortingFunction sorter, String name) {
         super(name);
@@ -23,7 +24,7 @@ class SortingThread extends Thread {
         for (int i = 0; i < times.length; i++) {
             int[] arr = Arrays.copyOf(randomArrays[i], randomArrays[i].length);
             long startTime = System.nanoTime();
-            sorter.sort(arr);
+            iterations[i] = sorter.sort(arr);
             double elapsedTime = (System.nanoTime() - startTime) / 1e9;
             times[i] = elapsedTime;
             if (i == MOVING_AVERAGE_SIZE - 1) {
@@ -43,6 +44,6 @@ class SortingThread extends Thread {
 
     interface SortingFunction {
 
-        void sort(int[] arr);
+        int sort(int[] arr);
     }
 }

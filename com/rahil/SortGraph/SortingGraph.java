@@ -9,10 +9,15 @@ class SortingGraph extends JPanel {
     static final int MAX_ARRAY_SIZE = 10_000;
 
     private static final int GRAPH_WIDTH = 640, GRAPH_HEIGHT = 500;
-    private static final double X_SCALE = (double) GRAPH_WIDTH / MAX_ARRAY_SIZE, Y_SCALE = GRAPH_HEIGHT / 1e-3;
+
+    double timeXScale = (double) GRAPH_WIDTH / MAX_ARRAY_SIZE, timeYScale = GRAPH_HEIGHT / 1e-2;
+    double iterationsXScale = (double) GRAPH_WIDTH / MAX_ARRAY_SIZE, iterationsYScale = GRAPH_HEIGHT / 1e5;
 
     private static final SortingThread.SortingFunction[] SORTING_FUNCTIONS = new SortingThread.SortingFunction[]{
-            Arrays :: sort,
+            (arr) -> {
+                Arrays.sort(arr);
+                return 0;
+            },
             Sort :: Bubble,
             Sort :: Insertion,
             Sort :: Selection,
@@ -26,27 +31,35 @@ class SortingGraph extends JPanel {
             , "Merge sort", "Quick sort"};
 
     //Add colors of the graph for each algorithm in the same order as above
-    private static final Color[] COLORS = new Color[]{Color.BLACK, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW,
-            Color.ORANGE};
+    private static final Color[] COLORS = new Color[]{
+            new Color(0, 0, 0, 0.4f),
+            new Color(1, 0, 0, 0.4f),
+            new Color(0, 1, 0, 0.4f),
+            new Color(0, 0, 1, 0.4f),
+            new Color(1, 1, 0, 0.4f),
+            new Color(1, 0, 1, 0.4f)
+    };
 
     JFrame frame;
     double[][] times;
     double[][] movingAverages;
+    double[][] iterations;
 
     SortingGraph() {
         super();
-        setPreferredSize(new Dimension(GRAPH_WIDTH, GRAPH_HEIGHT));
+        setPreferredSize(new Dimension(GRAPH_WIDTH * 2, GRAPH_HEIGHT));
+        setBackground(Color.GRAY);
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this);
         frame.pack();
-        setBackground(Color.GRAY);
     }
 
     public static void main(String[] args) {
         SortingThread.graph = new SortingGraph();
         SortingThread.graph.times = new double[SORTING_FUNCTIONS.length][MAX_ARRAY_SIZE];
         SortingThread.graph.movingAverages = new double[SORTING_FUNCTIONS.length][MAX_ARRAY_SIZE];
+        SortingThread.graph.iterations = new double[SORTING_FUNCTIONS.length][MAX_ARRAY_SIZE];
         SortingThread.randomArrays = new int[MAX_ARRAY_SIZE][];
         for (int i = 0; i < MAX_ARRAY_SIZE; i++) {
             SortingThread.randomArrays[i] = new int[i + 1];
@@ -61,6 +74,7 @@ class SortingGraph extends JPanel {
             sortingThreads[i] = new SortingThread(SORTING_FUNCTIONS[i], NAMES[i]);
             sortingThreads[i].times = SortingThread.graph.times[i];
             sortingThreads[i].movingAverages = SortingThread.graph.movingAverages[i];
+            sortingThreads[i].iterations = SortingThread.graph.iterations[i];
         }
         for (SortingThread thread : sortingThreads) {
             thread.start();
@@ -71,17 +85,18 @@ class SortingGraph extends JPanel {
     @Override
     synchronized public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawGraph(0, 0, movingAverages, g);
+        drawGraph(0, 0, timeXScale, timeYScale,movingAverages, g);
+        drawGraph(GRAPH_WIDTH, 0, iterationsXScale, iterationsYScale, iterations, g);
     }
 
-    void drawGraph(int x, int y, double[][] mat, Graphics g) {
+    void drawGraph(int x, int y, double scaleX, double scaleY, double[][] mat, Graphics g) {
         for (int i = 0; i < mat.length; ++i) {
             g.setColor(COLORS[i]);
-            int prevY = (int) (GRAPH_HEIGHT - mat[i][0] * Y_SCALE);
+            int prevY = (int) (GRAPH_HEIGHT - mat[i][0] * scaleY);
             int prevX = 0;
             for (int j = 1; j < MAX_ARRAY_SIZE; j++) {
-                int thisX = x + (int) (X_SCALE * j);
-                int thisY = y + (int) (GRAPH_HEIGHT - mat[i][j] * Y_SCALE);
+                int thisX = x + (int) (scaleX * j);
+                int thisY = y + (int) (GRAPH_HEIGHT - mat[i][j] * scaleY);
                 if (thisX < x || thisX > x + GRAPH_WIDTH - 1 || thisY < y || thisY > y + GRAPH_HEIGHT - 1) {
                     continue;
                 }
