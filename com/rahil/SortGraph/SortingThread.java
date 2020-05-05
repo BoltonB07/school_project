@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 class SortingThread extends Thread {
 
-    private static final int MOVING_AVERAGE_SIZE = 101;
+    private static final int MOVING_AVERAGE_SIZE = 2001;
 
     static int[][] randomArrays;
     static SortingGraph graph;
