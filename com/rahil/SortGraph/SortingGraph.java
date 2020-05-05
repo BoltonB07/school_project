@@ -40,6 +40,7 @@ class SortingGraph extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(this);
         frame.pack();
+        setBackground(Color.GRAY);
     }
 
     public static void main(String[] args) {
@@ -76,13 +77,13 @@ class SortingGraph extends JPanel {
     void drawGraph(int x, int y, double[][] mat, Graphics g) {
         for (int i = 0; i < mat.length; ++i) {
             g.setColor(COLORS[i]);
-            int prevY = (int) (mat[i][0] * Y_SCALE);
+            int prevY = (int) (GRAPH_HEIGHT - mat[i][0] * Y_SCALE);
             int prevX = 0;
             for (int j = 1; j < MAX_ARRAY_SIZE; j++) {
                 int thisX = x + (int) (X_SCALE * j);
                 int thisY = y + (int) (GRAPH_HEIGHT - mat[i][j] * Y_SCALE);
-                if (thisX < x || thisX > x + GRAPH_WIDTH || thisY < y || thisY > y + GRAPH_HEIGHT) {
-                    break;
+                if (thisX < x || thisX > x + GRAPH_WIDTH - 1 || thisY < y || thisY > y + GRAPH_HEIGHT - 1) {
+                    continue;
                 }
                 g.drawLine(prevX, prevY, thisX, thisY);
                 prevX = thisX;
