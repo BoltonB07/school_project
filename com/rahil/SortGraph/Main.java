@@ -2,6 +2,7 @@ package com.rahil.SortGraph;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.Arrays;
 
 class Main {
@@ -44,6 +45,8 @@ class Main {
     static double iterationsXScale = (double) GRAPH_WIDTH / MAX_ARRAY_SIZE;
     static double iterationsYScale = GRAPH_HEIGHT / 1e5;
 
+    static JPanel panel;
+
     public static void main(String[] args) {
         // Initializes all the matrices which store a row for each sorting algorithm
         double[][] times = new double[SORTING_FUNCTIONS.length][MAX_ARRAY_SIZE];
@@ -61,7 +64,7 @@ class Main {
         System.out.format("%s: Finished making %d random arrays.%n", Thread.currentThread().getName(), MAX_ARRAY_SIZE);
 
         // Initializes the component that draws the graph
-        JPanel panel = new JPanel() {
+        panel = new JPanel() {
             @Override
             synchronized protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -82,11 +85,20 @@ class Main {
                     iterations[i], panel);
         }
 
+        // Initializes the object that gets called by the JFrame when the mouse wheel is moved
+        MouseAdapter mouseListener = new MouseAdapter() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                Main.mouseWheelMoved(e);
+            }
+        };
+
         // Creates the swing window
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.add(panel);
+            frame.addMouseWheelListener(mouseListener);
             frame.pack();
             frame.setVisible(true);
         });
@@ -106,13 +118,49 @@ class Main {
             for (int j = 1; j < MAX_ARRAY_SIZE; j++) {
                 int thisX = x + (int) (scaleX * j);
                 int thisY = y + (int) (GRAPH_HEIGHT - mat[i][j] * scaleY);
-                if (thisX < x || thisX >= x + GRAPH_WIDTH || thisY < y || thisY >= y + GRAPH_HEIGHT) {
+                if (thisX < x || thisY >= y + GRAPH_HEIGHT) {
                     continue;
+                }
+                boolean shouldBreak = false;
+                if (thisX >= x + GRAPH_WIDTH) {
+                    thisX = x + GRAPH_WIDTH;
+                    shouldBreak = true;
+                }
+                if (thisY < y) {
+                    thisY = y;
+                    shouldBreak = true;
                 }
                 g.drawLine(prevX, prevY, thisX, thisY);
                 prevX = thisX;
                 prevY = thisY;
+                if (shouldBreak) {
+                    break;
+                }
             }
         }
+    }
+
+    static void mouseWheelMoved(MouseWheelEvent e) {
+        int x = e.getX(), y = e.getY();
+        if (0 < x && x < GRAPH_WIDTH) {
+            int scroll = e.getWheelRotation();
+            if (scroll > 0) {
+                timeXScale *= 1.1;
+                timeYScale *= 1.1;
+            } else {
+                timeXScale /= 1.1;
+                timeYScale /= 1.1;
+            }
+        } else if (GRAPH_WIDTH < x && x < GRAPH_WIDTH * 2) {
+            int scroll = e.getWheelRotation();
+            if (scroll > 0) {
+                iterationsXScale *= 1.1;
+                iterationsYScale *= 1.1;
+            } else {
+                iterationsXScale /= 1.1;
+                iterationsYScale /= 1.1;
+            }
+        }
+        e.getScrollAmount();
     }
 }
