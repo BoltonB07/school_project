@@ -4,11 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
 
-class SortingGraph extends JPanel {
+class Main {
 
     static final int MAX_ARRAY_SIZE = 10_000;
 
+    // Size of each individual graph
     private static final int GRAPH_WIDTH = 640, GRAPH_HEIGHT = 500;
+
     private static final SortingThread.SortingFunction[] SORTING_FUNCTIONS = new SortingThread.SortingFunction[]{
             (arr) -> {
                 Arrays.sort(arr);
@@ -36,29 +38,19 @@ class SortingGraph extends JPanel {
             new Color(1, 0, 1, 0.4f)
     };
 
-    double timeXScale = (double) GRAPH_WIDTH / MAX_ARRAY_SIZE, timeYScale = GRAPH_HEIGHT / 1e-2;
-    double iterationsXScale = (double) GRAPH_WIDTH / MAX_ARRAY_SIZE, iterationsYScale = GRAPH_HEIGHT / 1e5;
+    static double timeXScale = (double) GRAPH_WIDTH / MAX_ARRAY_SIZE;
+    static double timeYScale = GRAPH_HEIGHT / 1e-2;
 
-    JFrame frame;
-    double[][] times;
-    double[][] movingAverages;
-    double[][] iterations;
-
-    SortingGraph() {
-        super();
-        setPreferredSize(new Dimension(GRAPH_WIDTH * 2, GRAPH_HEIGHT));
-        setBackground(Color.GRAY);
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(this);
-        frame.pack();
-    }
+    static double iterationsXScale = (double) GRAPH_WIDTH / MAX_ARRAY_SIZE;
+    static double iterationsYScale = GRAPH_HEIGHT / 1e5;
 
     public static void main(String[] args) {
-        SortingThread.graph = new SortingGraph();
-        SortingThread.graph.times = new double[SORTING_FUNCTIONS.length][MAX_ARRAY_SIZE];
-        SortingThread.graph.movingAverages = new double[SORTING_FUNCTIONS.length][MAX_ARRAY_SIZE];
-        SortingThread.graph.iterations = new double[SORTING_FUNCTIONS.length][MAX_ARRAY_SIZE];
+        // Initializes all the matrices which store a row for each sorting algorithm
+        double[][] times = new double[SORTING_FUNCTIONS.length][MAX_ARRAY_SIZE];
+        double[][] movingAverages = new double[SORTING_FUNCTIONS.length][MAX_ARRAY_SIZE];
+        double[][] iterations = new double[SORTING_FUNCTIONS.length][MAX_ARRAY_SIZE];
+
+        // Initializes the random arrays that will be sorted
         SortingThread.randomArrays = new int[MAX_ARRAY_SIZE][];
         for (int i = 0; i < MAX_ARRAY_SIZE; i++) {
             SortingThread.randomArrays[i] = new int[i + 1];
@@ -67,28 +59,46 @@ class SortingGraph extends JPanel {
             }
         }
         System.out.format("%s: Finished making %d random arrays.%n", Thread.currentThread().getName(), MAX_ARRAY_SIZE);
-        SwingUtilities.invokeLater(() -> SortingThread.graph.frame.setVisible(true));
+
+        // Initializes the component that draws the graph
+        JPanel panel = new JPanel() {
+            @Override
+            synchronized protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                drawGraph(0, 0, timeXScale, timeYScale, movingAverages, g);
+                drawGraph(GRAPH_WIDTH, 0, iterationsXScale, iterationsYScale, iterations, g);
+            }
+        };
+
+        panel.setPreferredSize(new Dimension(GRAPH_WIDTH * 2, GRAPH_HEIGHT));
+        panel.setBackground(Color.GRAY);
+
+        // Initializes all the threads. Does not start them
         SortingThread[] sortingThreads = new SortingThread[SORTING_FUNCTIONS.length];
         for (int i = 0; i < SORTING_FUNCTIONS.length; i++) {
-            sortingThreads[i] = new SortingThread(SORTING_FUNCTIONS[i], NAMES[i]);
-            sortingThreads[i].times = SortingThread.graph.times[i];
-            sortingThreads[i].movingAverages = SortingThread.graph.movingAverages[i];
-            sortingThreads[i].iterations = SortingThread.graph.iterations[i];
+            sortingThreads[i] = new SortingThread(SORTING_FUNCTIONS[i], NAMES[i],
+                    times[i],
+                    movingAverages[i],
+                    iterations[i], panel);
         }
+
+        // Creates the swing window
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add(panel);
+            frame.pack();
+            frame.setVisible(true);
+        });
+
+        // Starts all the threads
         for (SortingThread thread : sortingThreads) {
             thread.start();
         }
         System.out.println("Started all threads.");
     }
 
-    @Override
-    synchronized public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        drawGraph(0, 0, timeXScale, timeYScale, movingAverages, g);
-        drawGraph(GRAPH_WIDTH, 0, iterationsXScale, iterationsYScale, iterations, g);
-    }
-
-    void drawGraph(int x, int y, double scaleX, double scaleY, double[][] mat, Graphics g) {
+    static void drawGraph(int x, int y, double scaleX, double scaleY, double[][] mat, Graphics g) {
         for (int i = 0; i < mat.length; ++i) {
             g.setColor(COLORS[i]);
             int prevY = (int) (GRAPH_HEIGHT - mat[i][0] * scaleY);

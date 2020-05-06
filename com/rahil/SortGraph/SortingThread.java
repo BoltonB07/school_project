@@ -1,5 +1,6 @@
 package com.rahil.SortGraph;
 
+import javax.swing.*;
 import java.util.Arrays;
 
 class SortingThread extends Thread {
@@ -7,16 +8,20 @@ class SortingThread extends Thread {
     private static final int MOVING_AVERAGE_SIZE = 2001;
 
     static int[][] randomArrays;
-    static SortingGraph graph;
 
     SortingFunction sorter;
     double[] times;
     double[] movingAverages;
     double[] iterations;
+    JPanel panel;
 
-    SortingThread(SortingFunction sorter, String name) {
+    SortingThread(SortingFunction sorter, String name, double[] times, double[] movingAverages, double[] iterations, JPanel panel) {
         super(name);
         this.sorter = sorter;
+        this.times = times;
+        this.movingAverages = movingAverages;
+        this.iterations = iterations;
+        this.panel = panel;
     }
 
     @Override
@@ -37,7 +42,7 @@ class SortingThread extends Thread {
                 movingAverages[j] = movingAverages[j - 1] * MOVING_AVERAGE_SIZE + times[i] - times[i - MOVING_AVERAGE_SIZE];
                 movingAverages[j] /= MOVING_AVERAGE_SIZE;
             }
-            graph.repaint();
+            panel.repaint();
         }
         System.out.format("%s: I finished!%n", Thread.currentThread().getName());
     }
