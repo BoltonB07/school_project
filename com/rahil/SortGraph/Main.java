@@ -71,7 +71,7 @@ class Main {
                 descendingArrays[i][j] = i + 1 - j;
             }
         }
-        System.out.format(": Finished making %d descending arrays.%n", MAX_ARRAY_SIZE);
+        System.out.format("main: Finished making %d descending arrays.%n", MAX_ARRAY_SIZE);
 
         SortingThread[] randomArrayThreads = new SortingThread[SORTING_FUNCTIONS.length];
         SortingThread[] descendingArrayThreads = new SortingThread[SORTING_FUNCTIONS.length];
@@ -134,7 +134,7 @@ class Main {
             thread.start();
         }
 
-        System.out.println("Started all threads.");
+        System.out.println("Started all threads.\nHover over a graph and scroll to zoom in or out.");
     }
 
     static void drawGraph(int x, int y, double scaleX, double scaleY, SortingThread[] threads, FieldSelector selector, Graphics g) {
