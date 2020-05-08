@@ -1,34 +1,58 @@
 package com.rahil.SortGraph;
 
+import javax.swing.*;
 import java.util.Arrays;
 
 class SortingThread extends Thread {
 
-    static int[][] randomArrays;
-    static SortingGraph graph;
+    private static final int MOVING_AVERAGE_SIZE = 1000;
 
     SortingFunction sorter;
-    double[] line;
+    JPanel panel;
+    int[][] unsortedArrays;
+    double[] times;
+    double[] iterations;
+    double[] timeMovingAverages;
 
-    SortingThread(SortingFunction sorter, String name) {
+    SortingThread(String name, SortingFunction sorter, JPanel panel, int[][] unsortedArrays) {
         super(name);
         this.sorter = sorter;
+        this.panel = panel;
+        this.unsortedArrays = unsortedArrays;
+        this.times = new double[unsortedArrays.length];
+        this.iterations = new double[unsortedArrays.length];
+        timeMovingAverages = new double[unsortedArrays.length];
     }
 
     @Override
     public void run() {
-        for (int i = 0; i < SortingGraph.MAX_ARRAY_SIZE; i++) {
-            int[] arr = Arrays.copyOf(randomArrays[i], randomArrays[i].length);
+        for (int i = 0; i < times.length; i++) {
+            int[] arr = Arrays.copyOf(unsortedArrays[i], unsortedArrays[i].length);
             long startTime = System.nanoTime();
-            sorter.sort(arr);
+            iterations[i] = sorter.sort(arr);
             double elapsedTime = (System.nanoTime() - startTime) / 1e9;
-            line[i] = elapsedTime;
-            graph.repaint();
+            times[i] = elapsedTime;
+
+            // Computes moving average
+            if (i == MOVING_AVERAGE_SIZE - 1) {
+                for (int j = 0; j < MOVING_AVERAGE_SIZE; j++) {
+                    timeMovingAverages[i / 2] += times[j];
+                }
+                timeMovingAverages[i / 2] /= MOVING_AVERAGE_SIZE;
+            } else if (i > MOVING_AVERAGE_SIZE - 1) {
+                int j = i - MOVING_AVERAGE_SIZE / 2;
+                timeMovingAverages[j] =
+                        timeMovingAverages[j - 1] * MOVING_AVERAGE_SIZE + times[i] - times[i - MOVING_AVERAGE_SIZE];
+                timeMovingAverages[j] /= MOVING_AVERAGE_SIZE;
+            }
+
+            panel.repaint();
         }
-        System.out.format("%s: I finished!%n", Thread.currentThread().getName());
+        System.out.format("%s: Finished%n", Thread.currentThread().getName());
     }
 
     interface SortingFunction {
-        void sort(int[] arr);
+
+        int sort(int[] arr);
     }
 }

@@ -40,6 +40,6 @@ class SortTest {
 
     interface Sorter {
 
-        void sort(int[] arr);
+        int sort(int[] arr);
     }
 }

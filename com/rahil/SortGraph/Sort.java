@@ -108,9 +108,7 @@ public class Sort {
         return iterations;
     }
     public static int Quick(int[] A){
-        int iterations=0;
-        quicksort(A, 0, A.length-1,iterations);
-        return iterations;
+        return quicksort(A, 0, A.length-1, 0);
     }
     private static int quicksort(int[] arr, int low, int high, int iterations){
         if (low < high){
