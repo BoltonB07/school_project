@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 class Main {
 
-    static final int MAX_ARRAY_SIZE = 10_000;
+    static final int MAX_ARRAY_SIZE = 5000;
 
     // Size of each individual graph
     private static final int GRAPH_WIDTH = 450, GRAPH_HEIGHT = 450;
@@ -189,7 +189,7 @@ class Main {
                 iterationsYScale /= 1.1;
             }
         }
-        e.getScrollAmount();
+        panel.repaint();
     }
 
     interface FieldSelector {
