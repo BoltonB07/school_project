@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class SMS { char[][] keypad; String input;
 SMS(String input$){
     keypad = new char[8][];
-    input=input$;
+    input=input$.toLowerCase();
     keypad[0]= new char[]{'a','b','c'};
     keypad[1]= new char[]{'d','e','f'};
     keypad[2]= new char[]{'g','h','i'};

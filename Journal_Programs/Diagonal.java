@@ -9,21 +9,28 @@ public class Diagonal {
         input = input$;
     }
 
-    void printDiagonal() {
+    void printDiagonal() {      //main logic method
+        int counter=0;
         mainloop:
         for (int i = 0; i <= input.length - 1; ) {
-            if (i < input.length - 2) {
-                i++;
-            }
+            if(counter>=8){break mainloop;}
+            System.out.println();
             subloop:
-            for (int j = 0; (j + 1) > input[i].length - 1; ) {
-                System.out.print(input[i][j]);
-                if (i - 1 < 0 || i - 1 > input.length - 1) {
+            for (int j = 0; ; ) {
+                if(counter>4){j=counter-i;}
+                System.out.print(input[i][j]+"\t");
+                if (i - 1 < 0 || j + 1 > input[i].length - 1) {
                     break subloop;
                 }
                 i--;
                 j++;
             }
+            counter++;
+            if (counter<=4) {
+                i=counter;
+            }
+            else{i=4;}
+
         }
     }
 
