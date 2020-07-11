@@ -24,8 +24,9 @@ public class Funny {
             System.out.println("s  = "+ "\""+input+"\"");
             System.out.println("r  = "+ "\""+rev+"\"");
             for(int i=0,j=1;j<=input.length()-1;i++,j++){
-                System.out.println("|"+input.charAt(i)+"-"+input.charAt(j)+"| = "+(input.charAt(i)-input.charAt(j))+" = |"+rev.charAt(i)+"-"+rev.charAt(j)+"|");
+                System.out.println("|"+input.charAt(i)+"-"+input.charAt(j)+"| = "+Math.abs((input.charAt(i)-input.charAt(j)))+" = |"+rev.charAt(i)+"-"+rev.charAt(j)+"|");
             }
+            System.out.println("Yes the output is Funny");
         }
     }
     String reverse(String str){
