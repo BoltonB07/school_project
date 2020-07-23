@@ -10,14 +10,8 @@ import java.io.*;
  */
 public class testclass
 {
-    void main() throws IOException{
-        BufferedReader br=new BufferedReader(new FileReader("absenteeList.txt"));
-        Scanner sc;
-        String line;
-        while((line=br.readLine())!=null){
-            sc=new Scanner(line);
-            System.out.println(sc.nextLine());
-        }
+    public static void main(String []Args) throws IOException{
+        System.out.println(Arrays.toString(ReadData.line(2)));
     }
 
 }
