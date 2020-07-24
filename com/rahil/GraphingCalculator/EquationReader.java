@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
  * double evaluate(String eqn, double x) takes an equation in x and y in the form y=c_1 + c_2+ c_3... + c_n and a value for x and returns the value of y.
  * This algorithm is made by BoltonB07.
  * @author BoltonB07
- * @version 0.1.0 (24/7/2020)
+ * @version 0.1.1 (24/7/2020)
  */
 public class EquationReader {
     double evaluate(String eqn,double x){
@@ -17,16 +17,22 @@ public class EquationReader {
         String coefft;
         double termValue;
         double yIs=0.0d;
-        char[] symbols={'+','-','=','*','/','^'};
+        char[] symbols={'+','-','=','*','/','^','(',')'};
         for(int i=0;i<=sb.length()-1;i++){
             if(sb.charAt(i)=='x'){
                 j=i;
-                while(j-1!=-1&&sb.charAt(j-1)!='='&&sb.charAt(j-1)!='+'&&sb.charAt(j-1)!='-'&&sb.charAt(j-1)!='/'&&sb.charAt(j-1)!='*'&&sb.charAt(j-1)!='^') {
+                while(j-1!=-1&&sb.charAt(j-1)!='='&&sb.charAt(j-1)!='+'&&sb.charAt(j-1)!='-'&&sb.charAt(j-1)!='/'&&sb.charAt(j-1)!='*'&&sb.charAt(j-1)!='^'&&sb.charAt(j-1)!='('&&sb.charAt(j-1)!=')') {
                     j--;
                 }
                 coefft=sb.substring(j,i);
-                termValue= Double.parseDouble(coefft)*x;
-                sb.replace(j,i+1, String.valueOf(termValue));
+                if(coefft.length()!=0) {
+                    termValue = Double.parseDouble(coefft) * x;
+                    sb.replace(j, i + 1, String.valueOf(termValue));
+                }
+                else{
+                    sb.replace(j,i+1, String.valueOf(x));
+                }
+                i=0;
             }
         }
         System.out.println(sb);
@@ -52,6 +58,6 @@ public class EquationReader {
         double x= Double.parseDouble(buff.readLine());
         System.out.println("\n"+eqn+" where x="+x);
         double i =o.evaluate(eqn,x);
-        System.out.println(i);
+        System.out.println("y= "+i);
     }
 }
