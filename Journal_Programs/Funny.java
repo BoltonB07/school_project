@@ -13,7 +13,7 @@ public class Funny {
         rev.toUpperCase();
         boolean isFunny=true;
         for(int i=0,j=1;j<=input.length()-1;i++,j++){
-            if(Math.abs(((int)input.charAt(i)-(int)input.charAt(j)))!=Math.abs(((int)rev.charAt(i)-(int)rev.charAt(j)))){
+            if(Math.abs(((int)input.charAt(i)-(int)input.charAt(j)))!=Math.abs(((int)rev.charAt(i)-(int)rev.charAt(j)))){ //Checks if the condition is true or not.
                 isFunny=false;
                 System.out.println("This isn't funny.");
                 break;
