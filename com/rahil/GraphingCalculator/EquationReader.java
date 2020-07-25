@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
  * double evaluate(String eqn, double x) takes an equation in x and y in the form y=c_1 + c_2+ c_3... + c_n and a value for x and returns the value of y.
  * This algorithm is made by BoltonB07.
  * @author BoltonB07
- * @version 0.1.1 (24/7/2020)
+ * @version 0.1.2 (24/7/2020)
  */
 public class EquationReader {
     double evaluate(String eqn,double x){
@@ -17,21 +17,29 @@ public class EquationReader {
         String coefft;
         double termValue;
         double yIs=0.0d;
+        boolean isExponent=false;
         char[] symbols={'+','-','=','*','/','^','(',')'};
         for(int i=0;i<=sb.length()-1;i++){
             if(sb.charAt(i)=='x'){
-                j=i;
+                j=i; //Problem in next line: where x=5, 2x^2 = garbage
                 while(j-1!=-1&&sb.charAt(j-1)!='='&&sb.charAt(j-1)!='+'&&sb.charAt(j-1)!='-'&&sb.charAt(j-1)!='/'&&sb.charAt(j-1)!='*'&&sb.charAt(j-1)!='^'&&sb.charAt(j-1)!='('&&sb.charAt(j-1)!=')') {
+                    if(sb.charAt(j+1)=='^') {
+                        isExponent=true;break;
+                    }
                     j--;
                 }
                 coefft=sb.substring(j,i);
-                if(coefft.length()!=0) {
+                if(isExponent){
+                    sb.replace(j,i+1, "*("+x+")");
+                }
+                else if(coefft.length()!=0) {
                     termValue = Double.parseDouble(coefft) * x;
                     sb.replace(j, i + 1, String.valueOf(termValue));
                 }
                 else{
                     sb.replace(j,i+1, String.valueOf(x));
                 }
+                isExponent=false; //Re-initializing values for the next iteration.
                 i=0;
             }
         }
@@ -58,6 +66,6 @@ public class EquationReader {
         double x= Double.parseDouble(buff.readLine());
         System.out.println("\n"+eqn+" where x="+x);
         double i =o.evaluate(eqn,x);
-        System.out.println("y= "+i);
+        System.out.println("y="+i);
     }
 }
