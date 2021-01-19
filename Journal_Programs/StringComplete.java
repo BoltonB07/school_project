@@ -10,19 +10,6 @@ public class StringComplete {
         this.second = second;
     }
 
-    void Combi() {
-        for (int i = 0; i <= first.length - 1; i++) {
-            for (int j = 0; j <= second.length - 1; j++) {
-                if (checkCombi(first[i],second[j]))
-                Print(first[i], second[j]);
-            }
-        }
-    }
-
-    private void Print(String s, String s1) {
-        System.out.println("\"" + s + s1 + "\"");
-    }
-
     static boolean checkCombi(String a, String b) {
         boolean ifFound = false;
         boolean holdsTrue = false;
@@ -43,10 +30,7 @@ public class StringComplete {
                 break;
             }
         }
-        if (holdsTrue)
-            return true;
-        else
-            return false;
+        return holdsTrue;
     }
 
     public static void main(String[] args) {
@@ -59,7 +43,20 @@ public class StringComplete {
         String[] b = new String[3];
         for (int i = 0; i <= b.length - 1; i++)
             b[i] = sc.nextLine();
-        StringComplete o =new StringComplete(a,b);
+        StringComplete o = new StringComplete(a, b);
         o.Combi();
+    }
+
+    void Combi() {
+        for (int i = 0; i <= first.length - 1; i++) {
+            for (int j = 0; j <= second.length - 1; j++) {
+                if (checkCombi(first[i], second[j]))
+                    Print(first[i], second[j]);
+            }
+        }
+    }
+
+    private void Print(String s, String s1) {
+        System.out.println("\"" + s + s1 + "\"");
     }
 }

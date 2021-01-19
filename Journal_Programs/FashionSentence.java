@@ -2,53 +2,37 @@ package Journal_Programs;
 
 import java.util.Scanner;
 
+import static java.lang.System.*;
+
 public class FashionSentence {
-    int a,b; String input;
-    FashionSentence(int a$,int b$, String input$){
-        a=a$;
-        b=b$;
-        input=input$;
-    }
-
-    void calc(){
-        if(a==b){cycleChar(a,input);}
-        else{
-            cycleChar(a,input);
-            cycleChar(b,input);
-        }
-        System.out.println(input);
-    }
-    void cycleChar(int number,String inputString){
-        Scanner sc=new Scanner(inputString);
-        Scanner sc2=new Scanner(inputString);
-        int counter=0;
-        while(counter<number){
-            sc.next();
-            counter++;
-        }
-        String temp1=sc.next();
-        String temp2=temp1;
-        StringBuilder myString = new StringBuilder(temp2);
-
-        for(int i=0;i<=temp2.length()-1;i++){
-            if(temp2.charAt(i)=='z'){myString.setCharAt(i, 'a');}
-            else if(temp2.charAt(i)=='Z'){myString.setCharAt(i, 'A');}
-            else {
-                myString.setCharAt(i, (char) ((int)(temp2.charAt(i)) + 1));
-            }
-        }
-
+    int a,b; String str;
+    FashionSentence(int a, int b, String str){
+        this.a=a;
+        this.b=b;
+        this.str=str;
     }
 
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        System.out.println("Enter string then enter 2 ints");
-        String input = sc.nextLine();
-        int a=sc.nextInt();
-        int b=sc.nextInt();
-        FashionSentence obj=new FashionSentence(a,b,input);
-        obj.calc();
-
-
+        Scanner sc = new Scanner(in);
+        out.println("Enter a sentence:");
+        String str = sc.nextLine();
+        out.println("Enter 2 numbers:");
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        FashionSentence o=new FashionSentence(a,b,str);
+        o.calc();
+    }
+    void calc(){
+        Scanner sc = new Scanner(this.str);
+        for(int i=0;sc.hasNext();i++){
+            String str=sc.next();
+            if(i==a-1||i==b-1){
+                for(int j=0;j<=str.length()-1;j++)
+                    out.print((char)(str.charAt(j)+1));
+                out.print(" ");
+            }
+            else
+                out.print(str+" ");
+        }
     }
 }

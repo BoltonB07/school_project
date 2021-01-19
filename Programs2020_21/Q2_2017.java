@@ -44,20 +44,20 @@ public class Q2_2017
         }
     }
 
-    public static void main() throws IOException{
+    public static void main(String[] args) throws IOException{
         int N;char[][] OPT;char[] KEY=new char[5];
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter number of participants (has to be between 3 and 11)");
         N=Integer.parseInt(br.readLine());
         if(N<3||N>11){
-            System.out.println(":( Your PC ran into a fatal error.\nError code: 42069xxx");
+            System.out.println("Error");
         }
         OPT=new char[N][5];
-        System.out.println("Enter the paricipant's options:");
+        System.out.println("Enter the participant's options:");
         for(int i=0;i<=OPT.length-1;i++){
             System.out.println("Participant: "+(i+1));
             for(int j=0;j<=OPT[i].length-1;j++){ 
-                OPT[i][j]=((br.readLine()).toUpperCase()).charAt(0);
+                OPT[i][j]=(br.readLine().toUpperCase()).charAt(0);
             }
         }
         System.out.println("Enter Answer Key");
