@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
  */
 public class EquationReader {
     double evaluate(String eqn,double x){
-        eqn=eqn.replaceAll(" ",""); //Gets rid of all spaces
+        eqn=eqn.replaceAll(" ",""); //Gets rid of all spaces //vv
         StringBuffer sb=new StringBuffer(eqn); //Assuming eqn is in y=c_1 + c_2+ c_3... + c_n form (for now at least.)
         int j;
         String coefft;
@@ -19,31 +19,80 @@ public class EquationReader {
         double yIs=0.0d;
         boolean isExponent=false;
         char[] symbols={'+','-','=','*','/','^','(',')'};
-        for(int i=0;i<=sb.length()-1;i++){
+        for(int i=2;i<=sb.length()-1;i++){
             if(sb.charAt(i)=='x'){
-                j=i; //Problem in next line: where x=5, 2x^2 = garbage
+                /*j=i; //Problem in next line: where x=5, 2x^2 = garbage
                 while(j-1!=-1&&sb.charAt(j-1)!='='&&sb.charAt(j-1)!='+'&&sb.charAt(j-1)!='-'&&sb.charAt(j-1)!='/'&&sb.charAt(j-1)!='*'&&sb.charAt(j-1)!='^'&&sb.charAt(j-1)!='('&&sb.charAt(j-1)!=')') {
-                    if(sb.charAt(j+1)=='^') {
+                    /*if(sb.charAt(j+1)=='^') {
                         isExponent=true;break;
-                    }
                     j--;
                 }
                 coefft=sb.substring(j,i);
-                if(isExponent){
-                    sb.replace(j,i+1, "*("+x+")");
+                /*if(isExponent){
+                        sb.replace(j, i + 1, "(" + x + ")");
                 }
                 else if(coefft.length()!=0) {
-                    termValue = Double.parseDouble(coefft) * x;
-                    sb.replace(j, i + 1, String.valueOf(termValue));
+                    sb.replace(j,i+1, "("+ x +")");
                 }
                 else{
                     sb.replace(j,i+1, String.valueOf(x));
                 }
-                isExponent=false; //Re-initializing values for the next iteration.
-                i=0;
+                */
+                sb.replace(i,i+1,"("+x+")");
+                //isExponent=false; //Re-initializing values for the next iteration.
             }
         }
-        System.out.println(sb);
+        System.out.println("Step 1: "+sb);
+        for(int i = sb.length() - 1; i > 1; i--){
+            if(sb.charAt(i)=='('){
+                if(Character.isDigit(sb.charAt(i-1))){
+                    sb.insert(i,"*");
+                }
+            }
+        }
+        System.out.println("Step 2: "+sb);
+        for(int i = sb.length() - 1; i > 1; i--){
+            if(Character.isLetter(sb.charAt(i))&&sb.charAt(i)!='x'){
+                if(Character.isDigit(sb.charAt(i-1))){
+                    sb.insert(i,"*");
+                }
+            }
+        }
+        /*for(int i = sb.length() - 1; i > -1; i--){
+            if(sb.charAt(i)=='('){
+                j=i;
+                while(j>=0&&sb.charAt(j-1)!='='&&sb.charAt(j-1)!='+'&&sb.charAt(j-1)!='-'&&sb.charAt(j-1)!='/'&&sb.charAt(j-1)!='*'&&
+                        sb.charAt(j-1)!='^'&&sb.charAt(j-1)!='('&&sb.charAt(j-1)!=')'){
+                    j--;
+                }
+                coefft=sb.substring(j,i);
+                if(!(coefft.equalsIgnoreCase("sin")||coefft.equalsIgnoreCase("cos")||coefft.equalsIgnoreCase("tan")||
+                        coefft.equalsIgnoreCase("sqrt")||sb.charAt(i-1)=='('||sb.charAt(i-1)=='+'|| sb.charAt(i-1)=='-'||
+                        sb.charAt(i-1)=='*'||sb.charAt(i-1)=='/')){
+                    if(!((sb.charAt(i-1)>64&&sb.charAt(i-1)<91)||(sb.charAt(i-1)>96&&
+                            sb.charAt(i-1)<120)||(sb.charAt(i-1)>120&&sb.charAt(i-1)<123))) {
+                        sb.insert(i, "*");
+                    }
+                }
+            }
+        }*/
+        /*
+        for(int i = sb.length() - 1; i > 2; i--){
+            if((Character.isLetter(sb.charAt(i-1))&&sb.charAt(i-1)!='x')) {
+                if (Character.isDigit(sb.charAt(i-1))) {
+                j = i;
+                while (j > 1 && sb.charAt(j - 1) != '=' && sb.charAt(j - 1) != '+' && sb.charAt(j - 1) != '-' && sb.charAt(j - 1) != '/' && sb.charAt(j - 1) != '*' &&
+                        sb.charAt(j - 1) != '^' && sb.charAt(j - 1) != '(' && sb.charAt(j - 1) != ')') {
+                    j--;
+                }
+                coefft = sb.substring(j, i);
+                if (!(coefft.isEmpty())) {
+                    sb.insert(i, "*");
+                }
+                }
+            }
+        }
+         */
         for(int i=0;i<=sb.length()-1;i++){    //Assuming that the equation is in y=c_1 + c_2+ c_3... + c_n form.
             if(sb.charAt(i)=='=')
                 yIs=Calculate.eval(sb.substring(i+1));
@@ -54,7 +103,6 @@ public class EquationReader {
         StringBuilder b=new StringBuilder("Apples");
         System.out.println(b.charAt(-1));
     }
-
 
 
     public static void main(String[] args) throws IOException {
